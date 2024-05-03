@@ -1,0 +1,440 @@
+@prefix : <http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos/> .
+
+<http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#hasPassanger
+:hasPassanger rdf:type owl:ObjectProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Aircraft ;
+              rdfs:range :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#hasRated
+:hasRated rdf:type owl:ObjectProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Passanger ;
+          rdfs:range :Flight .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#hasRating
+:hasRating rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Review ;
+           rdfs:range [ rdf:type owl:Restriction ;
+                        owl:onProperty :ratingValue ;
+                        owl:someValuesFrom xsd:integer
+                      ] .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#hasReview
+:hasReview rdf:type owl:ObjectProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Aircraft ;
+           rdfs:range :Review .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#isRecommended
+:isRecommended rdf:type owl:ObjectProperty ;
+               rdfs:domain :Review ;
+               rdfs:range [ rdf:type owl:Restriction ;
+                            owl:onProperty :recommendedValue ;
+                            owl:someValuesFrom xsd:boolean
+                          ] .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#flightDate
+:flightDate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Aircraft ;
+            rdfs:range xsd:dateTime .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#ratingValue
+:ratingValue rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Review ;
+             rdfs:range xsd:integer .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#recommendedValue
+:recommendedValue rdf:type owl:DatatypeProperty ;
+                  rdfs:domain :Review ;
+                  rdfs:range xsd:boolean .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Aircraft
+:Aircraft rdf:type owl:Class ;
+          rdfs:comment "Represents an aircraft used for the flight."@en ;
+          rdfs:label "Aircraft"@en ;
+          rdfs:seeAlso <https://dbpedia.org/ontology/Aircraft> .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Airport
+:Airport rdf:type owl:Class ;
+         rdfs:comment "Represents an airport." ;
+         rdfs:label "Airport"@en ;
+         rdfs:seeAlso <https://dbpedia.org/ontology/Airport> .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#AirportCheckIn
+:AirportCheckIn rdf:type owl:Class ;
+                rdfs:subClassOf :CheckIn .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#AisleSeat
+:AisleSeat rdf:type owl:Class ;
+           rdfs:subClassOf :Seat .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Arrival
+:Arrival rdf:type owl:Class ;
+         rdfs:comment "Represents the destination of the flight."@en ;
+         rdfs:label "Arrival"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#ArrivalAirport
+:ArrivalAirport rdf:type owl:Class ;
+                rdfs:subClassOf :Arrival .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#ArrivalCity
+:ArrivalCity rdf:type owl:Class ;
+             rdfs:subClassOf :Arrival .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Boarding
+:Boarding rdf:type owl:Class ;
+          rdfs:comment "Represents the process of boarding the flight." ;
+          rdfs:label "Boarding"@en ;
+          rdfs:seeAlso <https://dbpedia.org/page/Embarkation> .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#BusinessPassanger
+:BusinessPassanger rdf:type owl:Class ;
+                   rdfs:subClassOf :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Cabin
+:Cabin rdf:type owl:Class ;
+       rdfs:comment "Represents the interior of the plane."@en ;
+       rdfs:label "Cabin"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#CarryOnLuggage
+:CarryOnLuggage rdf:type owl:Class ;
+                rdfs:subClassOf :Luggage .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#CashPayment
+:CashPayment rdf:type owl:Class ;
+             rdfs:subClassOf :Payment ;
+             owl:disjointWith :CreditCardPayment .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#CheckIn
+:CheckIn rdf:type owl:Class ;
+         rdfs:comment "Represents the type of process used by the passanger to check in before the flight."@en ;
+         rdfs:label "CheckIn"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#CheckedLuggage
+:CheckedLuggage rdf:type owl:Class ;
+                rdfs:subClassOf :Luggage .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#ConnectingFlight
+:ConnectingFlight rdf:type owl:Class ;
+                  rdfs:subClassOf :Connection .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Connection
+:Connection rdf:type owl:Class ;
+            rdfs:comment "Represents the connection between flights."@en ;
+            rdfs:label "Connection"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#CreditCardPayment
+:CreditCardPayment rdf:type owl:Class ;
+                   rdfs:subClassOf :Payment .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Crew
+:Crew rdf:type owl:Class ;
+      rdfs:comment "Represents the personal of the flight aeroline."@en ;
+      rdfs:label "Crew"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Delay
+:Delay rdf:type owl:Class ;
+       rdfs:comment "Represents the delay of the flight."@en ;
+       rdfs:label "Delay"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Departure
+:Departure rdf:type owl:Class ;
+           rdfs:comment "Represents the starting point of the flight."@en ;
+           rdfs:label "Departure"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#DepartureAirport
+:DepartureAirport rdf:type owl:Class ;
+                  rdfs:subClassOf :Departure .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#DepartureCity
+:DepartureCity rdf:type owl:Class ;
+               rdfs:subClassOf :Departure .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#DirectFlight
+:DirectFlight rdf:type owl:Class ;
+              rdfs:subClassOf :Connection .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#DomesticAirport
+:DomesticAirport rdf:type owl:Class ;
+                 rdfs:subClassOf :Airport .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#DomesticFlight
+:DomesticFlight rdf:type owl:Class ;
+                rdfs:subClassOf :Flight ;
+                owl:disjointWith :InternationalFlight .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#ElectroicTicket
+:ElectroicTicket rdf:type owl:Class ;
+                 rdfs:subClassOf :Ticket .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#EmergencyExit
+:EmergencyExit rdf:type owl:Class ;
+               rdfs:subClassOf :Safety .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#EntertainmentService
+:EntertainmentService rdf:type owl:Class ;
+                      rdfs:subClassOf :Service .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Flight
+:Flight rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasPassanger ;
+                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :Passanger
+                        ] ;
+        rdfs:comment "Represents a flight made by an airline."@en ;
+        rdfs:label "Flight"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#FlightAttendant
+:FlightAttendant rdf:type owl:Class ;
+                 rdfs:subClassOf :Crew .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#GroupBoarding
+:GroupBoarding rdf:type owl:Class ;
+               rdfs:subClassOf :Boarding .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#InternationalAirport
+:InternationalAirport rdf:type owl:Class ;
+                      rdfs:subClassOf :Airport .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#InternationalFlight
+:InternationalFlight rdf:type owl:Class ;
+                     rdfs:subClassOf :Flight .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#LeisurePassanger
+:LeisurePassanger rdf:type owl:Class ;
+                  rdfs:subClassOf :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Luggage
+:Luggage rdf:type owl:Class ;
+         rdfs:comment "Represents the luggage or baggage of a passenger."@en ;
+         rdfs:label "Luggage" .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#MealService
+:MealService rdf:type owl:Class ;
+             rdfs:subClassOf :Service .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#NegativeReview
+:NegativeReview rdf:type owl:Class ;
+                rdfs:subClassOf :Review .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#OnlineCheckIn
+:OnlineCheckIn rdf:type owl:Class ;
+               rdfs:subClassOf :CheckIn .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#PaperTicket
+:PaperTicket rdf:type owl:Class ;
+             rdfs:subClassOf :Ticket .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Passanger
+:Passanger rdf:type owl:Class ;
+           rdfs:subClassOf [ rdf:type owl:Restriction ;
+                             owl:onProperty :hasReview ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onClass :Review
+                           ] ;
+           rdfs:comment "Represents a passenger traveling on a flight." ;
+           rdfs:label "Passanger"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Payment
+:Payment rdf:type owl:Class ;
+         rdfs:comment "Represents the method of payment used to pay for the flight."@en ;
+         rdfs:label "Payment"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Pilot
+:Pilot rdf:type owl:Class ;
+       rdfs:subClassOf :Crew .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#PositiveReview
+:PositiveReview rdf:type owl:Class ;
+                rdfs:subClassOf :Review .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#PriorityBoarding
+:PriorityBoarding rdf:type owl:Class ;
+                  rdfs:subClassOf :Boarding .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Rating
+:Rating rdf:type owl:Class ;
+        rdfs:comment "Represents the qualification made by the passanger of the flight."@en ;
+        rdfs:label "Rating"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Review
+:Review rdf:type owl:Class ;
+        rdfs:comment "Represents the comment or review made by the passanger about the flight."@en ;
+        rdfs:label "Review"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Safety
+:Safety rdf:type owl:Class ;
+        rdfs:comment "Represents the safety measures of the flight."@en ;
+        rdfs:label "Safety" .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#SafetyDemonstration
+:SafetyDemonstration rdf:type owl:Class ;
+                     rdfs:subClassOf :Safety .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Seat
+:Seat rdf:type owl:Class ;
+      rdfs:comment "Represents the seat in the plane."@en ;
+      rdfs:label "Seat"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Service
+:Service rdf:type owl:Class ;
+         rdfs:comment "Represents the service made during the flight."@en ;
+         rdfs:label "Service"@en .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#TechnicalDelay
+:TechnicalDelay rdf:type owl:Class ;
+                rdfs:subClassOf :Delay .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Ticket
+:Ticket rdf:type owl:Class ;
+        rdfs:comment "Represents the flights ticket."@en ;
+        rdfs:label "Ticket" .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#WeatherDelay
+:WeatherDelay rdf:type owl:Class ;
+              rdfs:subClassOf :Delay .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#WindowSeat
+:WindowSeat rdf:type owl:Class ;
+            rdfs:subClassOf :Seat .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#AirbusA380
+:AirbusA380 rdf:type owl:NamedIndividual ,
+                     :Aircraft .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Business
+:Business rdf:type owl:NamedIndividual ,
+                   :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Business_Class
+:Business_Class rdf:type owl:NamedIndividual ,
+                         :Cabin .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Couple_Leisure
+:Couple_Leisure rdf:type owl:NamedIndividual ,
+                         :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Doha
+:Doha rdf:type owl:NamedIndividual ,
+               :Airport ,
+               :Departure .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Economy_Class
+:Economy_Class rdf:type owl:NamedIndividual ,
+                        :Cabin .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#London_Heathrow
+:London_Heathrow rdf:type owl:NamedIndividual ,
+                          :Airport ,
+                          :Arrival ,
+                          :Departure .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Solo_Leisure
+:Solo_Leisure rdf:type owl:NamedIndividual ,
+                       :Passanger .
+
+
+###  http://www.semanticweb.org/polto/ontologies/2024/4/Satisfaccion_de_Vuelos#Tokyo
+:Tokyo rdf:type owl:NamedIndividual ,
+                :Airport ,
+                :Arrival ,
+                :Departure .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
